@@ -1,16 +1,20 @@
+require('dotenv').config()
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const blogRoutes = require('./routes/blogRoutes');
 
+
 // express app
 const app = express();
 
 // connect to mongodb & listen for requests
-const dbURI = "mongodb+srv://node-user:uthum1234@cluster0.75gbgmo.mongodb.net/nodejs-course?retryWrites=true&w=majority";
+const dbURI = process.env.dbURI;
 
+
+console.log(dbURI);
 mongoose.connect(dbURI)
-  .then(result => app.listen(3000))
+  .then(result => app.listen(process.env.PORT || 3000))
   .catch(err => console.log(err));
 
 // register view engine
